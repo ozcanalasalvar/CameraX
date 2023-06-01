@@ -76,9 +76,7 @@ class VideoFragment : Fragment() {
     private lateinit var scaleGestureDetector: ScaleGestureDetector
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentVideoBinding.inflate(inflater, container, false)
         return binding.root
@@ -101,8 +99,7 @@ class VideoFragment : Fragment() {
                 MotionEvent.ACTION_UP -> {
                     val factory = binding.viewFinder.meteringPointFactory
                     val point = factory.createPoint(motionEvent.x, motionEvent.y)
-                    val action = FocusMeteringAction.Builder(point)
-                        .build()
+                    val action = FocusMeteringAction.Builder(point).build()
 
                     camera?.cameraControl?.startFocusAndMetering(action)
 
@@ -229,13 +226,12 @@ class VideoFragment : Fragment() {
                 cameraProvider ?: throw IllegalStateException("Camera initialization failed.")
 
 
-            val preview = Preview.Builder()
-                .setTargetAspectRatio(aspectRatio) // set the camera aspect ratio
-                .setTargetRotation(rotation) // set the camera rotation
-                .build()
-                .apply {
-                    setSurfaceProvider(binding.viewFinder.surfaceProvider)
-                }
+            val preview =
+                Preview.Builder().setTargetAspectRatio(aspectRatio) // set the camera aspect ratio
+                    .setTargetRotation(rotation) // set the camera rotation
+                    .build().apply {
+                        setSurfaceProvider(binding.viewFinder.surfaceProvider)
+                    }
 
             val quality = QualitySelector.from(
                 Quality.HIGHEST, FallbackStrategy.higherQualityOrLowerThan(
@@ -243,9 +239,7 @@ class VideoFragment : Fragment() {
                 )
             )
 
-            val recorder = Recorder.Builder()
-                .setQualitySelector(quality)
-                .build()
+            val recorder = Recorder.Builder().setQualitySelector(quality).build()
             videoCapture = VideoCapture.withOutput(recorder)
 
 
@@ -253,10 +247,7 @@ class VideoFragment : Fragment() {
             try {
                 localCameraProvider.unbindAll()
                 camera = localCameraProvider.bindToLifecycle(
-                    viewLifecycleOwner,
-                    viewModel.lensFacing,
-                    videoCapture,
-                    preview
+                    viewLifecycleOwner, viewModel.lensFacing, videoCapture, preview
                 )
             } catch (exc: Exception) {
                 Log.e("CameraFragment", "Use case binding failed", exc)
@@ -280,11 +271,8 @@ class VideoFragment : Fragment() {
             put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/${appName}")
         }
         val mediaStoreOutput = MediaStoreOutputOptions.Builder(
-            requireActivity().contentResolver,
-            MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-        )
-            .setContentValues(contentValues)
-            .build()
+            requireActivity().contentResolver, MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+        ).setContentValues(contentValues).build()
 
         currentRecording = videoCapture.output.prepareRecording(requireActivity(), mediaStoreOutput)
             .apply { if (viewModel.audioEnabled.value!!) withAudioEnabled() }
@@ -360,9 +348,11 @@ class VideoFragment : Fragment() {
         if (enable) {
             binding.pnlStartRecording.visibility = View.INVISIBLE
             binding.pnlRecording.visibility = View.VISIBLE
+            binding.cameraOption.visibility = View.GONE
         } else {
             binding.pnlStartRecording.visibility = View.VISIBLE
             binding.pnlRecording.visibility = View.GONE
+            binding.cameraOption.visibility = View.VISIBLE
             binding.ivPause.setImageResource(R.drawable.ic_pause)
         }
 
@@ -436,10 +426,7 @@ class VideoFragment : Fragment() {
 
         bindCaptureUseCase()
 
-        binding.ivFacing.animate()
-            .rotation(rotationDegree)
-            .setDuration(500)
-            .start()
+        binding.ivFacing.animate().rotation(rotationDegree).setDuration(500).start()
     }
 
 
@@ -460,13 +447,14 @@ class VideoFragment : Fragment() {
 
         val mc = MediaController(requireContext())
         val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.MATCH_PARENT,
-            FrameLayout.LayoutParams.MATCH_PARENT
+            FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT
         )
         params.bottomMargin = 200
         mc.layoutParams = params
 
 
+
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
         // mc.setAnchorView(binding.controllerView)
 
 
@@ -495,8 +483,7 @@ class VideoFragment : Fragment() {
          }*/
     }
 
-    private fun clearPreview() {
-        /* binding.previewWindow.visibility = View.GONE
+    private fun clearPreview() {/* binding.previewWindow.visibility = View.GONE
          binding.videoViewer.visibility = View.GONE
          binding.videoViewer.visibility = View.VISIBLE
          binding.controllerView.removeAllViews()*/
