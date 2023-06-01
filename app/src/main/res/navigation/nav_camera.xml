@@ -1,0 +1,24 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_camera"
+    app:startDestination="@id/cameraFragment">
+
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.ozcanalasalvar.camerax.fragments.CameraFragment"
+        android:label="CameraFragment"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_cameraFragment_to_videoFragment"
+            app:destination="@id/videoFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_camera"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.ozcanalasalvar.camerax.fragments.VideoFragment"
+        android:label="VideoFragment"
+        tools:layout="@layout/fragment_video"/>
+</navigation>
