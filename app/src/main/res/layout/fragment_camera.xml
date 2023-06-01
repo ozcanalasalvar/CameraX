@@ -1,14 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.CameraFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/black">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true">
+
+            <androidx.camera.view.PreviewView
+                android:id="@+id/viewFinder"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="V,9:16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.655"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_gravity="bottom"
+                android:animateLayoutChanges="true"
+                android:background="@color/black80"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+
+                <LinearLayout
+                    android:id="@+id/pnlFacing"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/style_circle"
+                    android:backgroundTint="@color/black80"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/photoButton"
+                    app:layout_constraintStart_toEndOf="@+id/photoButton"
+                    app:layout_constraintTop_toTopOf="@+id/photoButton">
+
+                    <ImageView
+                        android:id="@+id/ivFacing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="facing"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_sync_white" />
+                </LinearLayout>
+
+
+                <FrameLayout
+                    android:id="@+id/photoButton"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:background="@drawable/border_circle"
+                    android:contentDescription="photoButton"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cameraOption">
+
+
+                    <ProgressBar
+                        android:id="@+id/captureProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:alpha="0.8"
+                        android:indeterminate="true"
+                        android:indeterminateTint="#80000000"
+                        android:indeterminateTintMode="src_atop"
+                        android:padding="5dp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                </FrameLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/cameraOption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="PHOTO"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/swCameraOption"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        app:thumbTint="@color/white"
+
+                        android:checked="false"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="VIDEO"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:background="@color/black80"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <LinearLayout
+                    android:id="@+id/pnlFLash"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/pnlRatio"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivFlash"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:contentDescription="flash"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_flash_on" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/pnlRatio"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/pnlFLash"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvRatio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_flash_on"
+                        android:text="16:9"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/pnlFlashOptions"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:background="@color/black"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/ivFlashOn"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginEnd="30dp"
+                        android:background="@drawable/ic_circle"
+                        android:backgroundTint="@color/black"
+                        android:contentDescription="flashOn"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:src="@drawable/ic_flash_on" />
+
+                    <ImageView
+                        android:id="@+id/ivFlashOff"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginEnd="30dp"
+                        android:background="@drawable/ic_circle"
+                        android:backgroundTint="@color/black"
+                        android:contentDescription="flashOff"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:src="@drawable/ic_flash_off" />
+
+                    <ImageView
+                        android:id="@+id/ivFlashAuto"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/ic_circle"
+                        android:backgroundTint="@color/black"
+                        android:contentDescription="flashAuto"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:src="@drawable/ic_flash_auto" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/pnlRatioOptions"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:background="@color/black"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvRatio_16_9"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/ic_circle"
+                        android:backgroundTint="@color/black"
+                        android:paddingTop="13dp"
+                        android:paddingBottom="10dp"
+                        android:src="@drawable/ic_flash_off"
+                        android:text="16:9"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvRatio_4_3"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="50dp"
+                        android:background="@drawable/ic_circle"
+                        android:backgroundTint="@color/black"
+                        android:paddingTop="13dp"
+                        android:paddingBottom="10dp"
+                        android:src="@drawable/ic_flash_auto"
+                        android:text="4:3"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--   <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+               android:id="@+id/zoomSeekWrapper"
+               android:layout_width="50dp"
+               android:layout_height="350dp"
+               android:layout_gravity="left|bottom"
+               android:layout_marginStart="50dp"
+               android:layout_marginBottom="200dp"
+               android:background="@drawable/curved_bg"
+               android:backgroundTint="@color/black80"
+               android:visibility="invisible">
+
+               <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                   android:id="@+id/zoomSeekBar"
+                   android:layout_width="match_parent"
+                   android:layout_height="0dp"
+                   android:max="80"
+                   android:maxHeight="2dp"
+                   android:minHeight="2dp"
+                   android:progressDrawable="@drawable/progress_drawable"
+                   android:splitTrack="false"
+                   android:thumbTint="@color/white"
+                   app:seekBarRotation="CW270" /> &lt;!&ndash; Rotation: CW90 or CW270 &ndash;&gt;
+           </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
+   -->
+
+    </FrameLayout>
+
+
+</layout>

@@ -6,7 +6,7 @@ import androidx.camera.core.CameraSelector
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class CameraVM: ViewModel() {
+class CameraVM : ViewModel() {
 
     val savedUri = MutableLiveData<Uri?>(null)
 

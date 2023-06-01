@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.ozcanalasalvar.camerax.databinding.ActivityCameraBinding
 import com.ozcanalasalvar.camerax.fragments.CameraVM
+import com.ozcanalasalvar.camerax.utils.Permissions
 
 class CameraActivity : AppCompatActivity() {
 
@@ -19,33 +21,58 @@ class CameraActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCameraBinding
 
-    @SuppressLint("ClickableViewAccessibility") override fun onCreate(savedInstanceState: Bundle?) {
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         window.navigationBarColor = Color.parseColor("#80000000")
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initNavController()
-        intent.extras.let {
-            when (it?.getString(CAPTURE_TYPE, CAMERA)) {
-                CAMERA -> {}
-                VIDEO -> {
-                    if ((navController.currentDestination?.id ?: -1) != R.id.videoFragment) {
-                        navController.navigate(R.id.action_cameraFragment_to_videoFragment)
-                    }
-                }
-                else -> throw Exception("Please pass valid camera type")
-            }
+        /* intent.extras.let {
+             when (it?.getString(CAPTURE_TYPE, CAMERA)) {
+                 CAMERA -> {}
+                 VIDEO -> {
+                     if ((navController.currentDestination?.id ?: -1) != R.id.videoFragment) {
+                         navController.navigate(R.id.action_cameraFragment_to_videoFragment)
+                     }
+                 }
+
+                 else -> {
+ //                    throw Exception("Please pass valid camera type")
+                 }
+             }
+         }*/
+
+
+        if (!Permissions.isPermissionTaken(this)) {
+            requestPermissions()
         }
+
+        //navController.navigate(R.id.action_cameraFragment_to_videoFragment)
 
     }
 
     private fun initNavController() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.cameraNavHost) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.cameraNavHost) as NavHostFragment
         navController = navHostFragment.navController
     }
+
+    private fun requestPermissions() {
+        permissionLauncher.launch(Permissions.requestList)
+    }
+
+
+    private val permissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            permissions.entries.all { it.value }
+        }
+
 
     companion object {
         const val CAPTURE_TYPE = "capture_type"
