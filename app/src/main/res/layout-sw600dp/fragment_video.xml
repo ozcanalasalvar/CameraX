@@ -160,7 +160,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PHOTO"
+                    android:text="@string/photo"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -177,7 +177,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="VIDEO"
+                    android:text="@string/video"
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold" />
