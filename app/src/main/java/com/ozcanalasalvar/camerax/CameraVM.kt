@@ -1,4 +1,4 @@
-package com.ozcanalasalvar.camerax.fragments
+package com.ozcanalasalvar.camerax
 
 import android.net.Uri
 import androidx.camera.core.AspectRatio

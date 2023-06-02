@@ -15,7 +15,6 @@ import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import androidx.activity.addCallback
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
@@ -30,6 +29,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.ozcanalasalvar.camerax.CameraVM
 import com.ozcanalasalvar.camerax.R
 import com.ozcanalasalvar.camerax.databinding.FragmentCameraBinding
 import com.ozcanalasalvar.camerax.utils.DateFormats

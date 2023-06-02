@@ -11,7 +11,6 @@ import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.ozcanalasalvar.camerax.databinding.ActivityCameraBinding
-import com.ozcanalasalvar.camerax.fragments.CameraVM
 import com.ozcanalasalvar.camerax.utils.Permissions
 
 class CameraActivity : AppCompatActivity() {
