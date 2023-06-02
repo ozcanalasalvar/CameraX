@@ -73,7 +73,7 @@ class CameraFragment : Fragment() {
                 MotionEvent.ACTION_DOWN -> {
                     binding.pnlFlashOptions.visibility = View.GONE
                     binding.pnlRatioOptions.visibility = View.GONE
-                    // binding.zoomSeekWrapper.visibility = View.VISIBLE
+                     binding.zoomSeekWrapper.visibility = View.VISIBLE
                     startTouchTimer()
                     return@setOnTouchListener true
                 }
@@ -92,16 +92,6 @@ class CameraFragment : Fragment() {
             }
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            /* if (binding.previewWindow.isVisible) {
-                 return@addCallback
-             } else {
-                 FileManager.deleteFile(FilePath.mediaRaw)
-                 requireActivity().finish()
-             }*/
-
-        }
-
         updateRatioView()
 
         binding.photoButton.setOnClickListener { takePhoto() }
@@ -115,7 +105,7 @@ class CameraFragment : Fragment() {
         binding.tvRatio169.setOnClickListener(ratioChangeListener)
         binding.tvRatio43.setOnClickListener(ratioChangeListener)
 
-        // binding.zoomSeekBar.setOnSeekBarChangeListener(zoomSeekListener)
+         binding.zoomSeekBar.setOnSeekBarChangeListener(zoomSeekListener)
         scaleGestureDetector = ScaleGestureDetector(requireContext(), zoomListener)
 
 
@@ -312,12 +302,12 @@ class CameraFragment : Fragment() {
             scale?.let { value ->
                 camera?.cameraControl?.setZoomRatio(value)
                 val result = if (value < 1.5) 0.0f else value
-//                binding.zoomSeekBar.setOnSeekBarChangeListener(null)
-//                binding.zoomSeekBar.progress = (result * 10).toInt()
-//                binding.zoomSeekBar.setOnSeekBarChangeListener(zoomSeekListener)
+                binding.zoomSeekBar.setOnSeekBarChangeListener(null)
+                binding.zoomSeekBar.progress = (result * 10).toInt()
+                binding.zoomSeekBar.setOnSeekBarChangeListener(zoomSeekListener)
             }
 
-            // binding.zoomSeekWrapper.visibility = View.VISIBLE
+             binding.zoomSeekWrapper.visibility = View.VISIBLE
             startTouchTimer()
 
             return true
@@ -397,14 +387,14 @@ class CameraFragment : Fragment() {
 
 
     private var timer: CountDownTimer? = null
-    private fun startTouchTimer(duration: Long = 2000) {
+    private fun startTouchTimer(duration: Long = 1000) {
         timer?.cancel()
         timer = null
         timer = object : CountDownTimer(duration, 1000) {
             override fun onTick(millisUntilFinished: Long) {}
 
             override fun onFinish() {
-                // binding.zoomSeekWrapper.visibility = View.INVISIBLE
+                 binding.zoomSeekWrapper.visibility = View.INVISIBLE
             }
         }.start()
     }

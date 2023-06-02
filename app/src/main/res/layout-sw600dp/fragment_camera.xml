@@ -33,32 +33,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <!--  <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
-                  android:id="@+id/zoomSeekWrapper"
-                  android:layout_width="50dp"
-                  android:layout_height="350dp"
-                  android:layout_gravity="left|bottom"
-                  android:layout_marginStart="50dp"
-                  android:visibility="invisible"
-                  android:layout_marginBottom="200dp"
-                  android:background="@drawable/curved_bg"
-                  android:backgroundTint="@color/black80">
-
-                  <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
-                      android:id="@+id/zoomSeekBar"
-                      android:layout_width="match_parent"
-                      android:layout_height="0dp"
-                      android:maxHeight="2dp"
-                      android:minHeight="2dp"
-                      android:splitTrack="false"
-                      android:max="80"
-                      android:thumbTint="@color/white"
-                      android:progressDrawable="@drawable/progress_drawable"
-                      app:seekBarRotation="CW270" /> &lt;!&ndash; Rotation: CW90 or CW270 &ndash;&gt;
-              </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
-  -->
-
-
             <LinearLayout
                 android:id="@+id/cameraOption"
                 android:layout_width="wrap_content"
@@ -318,87 +292,34 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+            <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+                android:id="@+id/zoomSeekWrapper"
+                android:layout_width="50dp"
+                android:layout_height="350dp"
+                android:layout_gravity="left|bottom"
+                android:layout_marginStart="50dp"
+                android:layout_marginBottom="200dp"
+                android:background="@drawable/curved_bg"
+                android:backgroundTint="@color/black80"
+                android:visibility="invisible"
+                tools:visibility="visible">
+
+                <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                    android:id="@+id/zoomSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:max="80"
+                    android:maxHeight="2dp"
+                    android:minHeight="2dp"
+                    android:progressDrawable="@drawable/progress_drawable"
+                    android:splitTrack="false"
+                    android:thumbTint="@color/white"
+                    app:seekBarRotation="CW270" /> <!-- Rotation: CW90 or CW270 -->
+            </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
         </FrameLayout>
 
 
-        <!--  <androidx.constraintlayout.widget.ConstraintLayout
-              android:id="@+id/previewWindow"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/black"
-              android:clickable="true"
-              android:focusable="true"
-              android:visibility="gone"
-              tools:visibility="gone">
-
-
-              <ImageView
-                  android:id="@+id/imageView"
-                  android:layout_width="match_parent"
-                  android:layout_height="0dp"
-                  android:layout_gravity="top|center_horizontal"
-                  android:layout_margin="16dp"
-                  android:layout_marginTop="50dp"
-                  android:alpha="1.0"
-                  android:scaleType="fitCenter"
-                  app:layout_constraintBottom_toTopOf="@+id/pnlConfirm"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintTop_toTopOf="parent" />
-
-
-              <LinearLayout
-                  android:id="@+id/pnlConfirm"
-                  android:layout_width="match_parent"
-                  android:layout_height="50dp"
-                  android:layout_marginStart="20dp"
-                  android:layout_marginEnd="20dp"
-                  android:layout_marginBottom="20dp"
-                  android:orientation="horizontal"
-                  app:layout_constraintBottom_toBottomOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintStart_toStartOf="parent">
-
-                  <FrameLayout
-                      android:layout_width="0dp"
-                      android:layout_height="match_parent"
-                      android:layout_weight="1">
-
-
-                      <TextView
-                          android:id="@+id/tvTryAgain"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_gravity="center"
-                          android:text="@string/retry"
-                          android:textColor="@color/white"
-                          android:textSize="24sp"
-                          android:textStyle="bold" />
-
-                  </FrameLayout>
-
-                  <FrameLayout
-                      android:layout_width="0dp"
-                      android:layout_height="match_parent"
-                      android:layout_weight="1">
-
-                      <TextView
-                          android:id="@+id/tvApprove"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_gravity="center"
-                          android:text="@string/save"
-                          android:textColor="@color/white"
-                          android:textSize="24sp"
-                          android:textStyle="bold" />
-
-                  </FrameLayout>
-
-              </LinearLayout>
-
-
-          </androidx.constraintlayout.widget.ConstraintLayout>
-  -->
     </FrameLayout>
 
 

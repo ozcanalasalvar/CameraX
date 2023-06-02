@@ -299,33 +299,39 @@
 
             </LinearLayout>
 
+
+            <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+                android:id="@+id/zoomSeekWrapper"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:layout_gravity="left|bottom"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="100dp"
+                android:background="@drawable/curved_bg"
+                android:backgroundTint="@color/black80"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible">
+
+                <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                    android:id="@+id/zoomSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:max="80"
+                    android:maxHeight="2dp"
+                    android:minHeight="2dp"
+                    android:progressDrawable="@drawable/progress_drawable"
+                    android:splitTrack="false"
+                    android:thumbTint="@color/white"
+                    app:seekBarRotation="CW270" /> <!-- Rotation: CW90 or CW270 -->
+            </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--   <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
-               android:id="@+id/zoomSeekWrapper"
-               android:layout_width="50dp"
-               android:layout_height="350dp"
-               android:layout_gravity="left|bottom"
-               android:layout_marginStart="50dp"
-               android:layout_marginBottom="200dp"
-               android:background="@drawable/curved_bg"
-               android:backgroundTint="@color/black80"
-               android:visibility="invisible">
 
-               <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
-                   android:id="@+id/zoomSeekBar"
-                   android:layout_width="match_parent"
-                   android:layout_height="0dp"
-                   android:max="80"
-                   android:maxHeight="2dp"
-                   android:minHeight="2dp"
-                   android:progressDrawable="@drawable/progress_drawable"
-                   android:splitTrack="false"
-                   android:thumbTint="@color/white"
-                   app:seekBarRotation="CW270" /> &lt;!&ndash; Rotation: CW90 or CW270 &ndash;&gt;
-           </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
-
-   -->
 
     </FrameLayout>
 

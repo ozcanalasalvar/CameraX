@@ -154,21 +154,6 @@ class VideoFragment : Fragment() {
             }
         }
 
-
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            /* if (binding.previewWindow.isVisible) {
-                 return@addCallback
-             } else {
-                 if (currentRecording == null || recordingState is VideoRecordEvent.Finalize) {
-                     requireActivity().finish()
-                     return@addCallback
-                 }
-
-                 stopRecording()
-             }*/
-
-        }
-
         binding.pnlFacing.setOnClickListener(facingChangeListener)
         binding.pnlSound.setOnClickListener(soundChangeListener)
         binding.zoomSeekBar.setOnSeekBarChangeListener(zoomSeekListener)
@@ -334,7 +319,7 @@ class VideoFragment : Fragment() {
         val minuteText = if (minute > 9) second.toString() else "0$minute"
 
         binding.tvTimerTick.text = "$minuteText:$secondText"
-        println("Timer  : " + "$minuteText:$secondText")
+        println("Timer  : $minuteText:$secondText")
 
 
     }

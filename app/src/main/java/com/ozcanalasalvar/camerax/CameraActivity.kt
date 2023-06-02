@@ -33,28 +33,10 @@ class CameraActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initNavController()
-        /* intent.extras.let {
-             when (it?.getString(CAPTURE_TYPE, CAMERA)) {
-                 CAMERA -> {}
-                 VIDEO -> {
-                     if ((navController.currentDestination?.id ?: -1) != R.id.videoFragment) {
-                         navController.navigate(R.id.action_cameraFragment_to_videoFragment)
-                     }
-                 }
-
-                 else -> {
- //                    throw Exception("Please pass valid camera type")
-                 }
-             }
-         }*/
-
 
         if (!Permissions.isPermissionTaken(this)) {
             requestPermissions()
         }
-
-        //navController.navigate(R.id.action_cameraFragment_to_videoFragment)
-
     }
 
     private fun initNavController() {
@@ -72,12 +54,5 @@ class CameraActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             permissions.entries.all { it.value }
         }
-
-
-    companion object {
-        const val CAPTURE_TYPE = "capture_type"
-        const val CAMERA = "camera"
-        const val VIDEO = "video"
-    }
 
 }
