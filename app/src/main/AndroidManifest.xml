@@ -19,9 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CameraX"
         tools:targetApi="31">
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+
         <activity
             android:name=".CameraActivity"
             android:exported="true">
