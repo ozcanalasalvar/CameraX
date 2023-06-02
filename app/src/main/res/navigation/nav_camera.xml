@@ -14,11 +14,25 @@
             app:destination="@id/videoFragment"
             app:launchSingleTop="true"
             app:popUpTo="@+id/nav_camera"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/videoFragment"
         android:name="com.ozcanalasalvar.camerax.fragments.VideoFragment"
         android:label="VideoFragment"
-        tools:layout="@layout/fragment_video"/>
+        tools:layout="@layout/fragment_video">
+        <action
+            android:id="@+id/action_videoFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_camera"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="com.ozcanalasalvar.camerax.fragments.PreviewFragment"
+        android:label="fragment_preview"
+        tools:layout="@layout/fragment_preview" />
+
 </navigation>

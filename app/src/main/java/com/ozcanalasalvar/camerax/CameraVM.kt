@@ -1,4 +1,4 @@
-package com.ozcanalasalvar.camerax.fragments
+package com.ozcanalasalvar.camerax
 
 import android.net.Uri
 import androidx.camera.core.AspectRatio
@@ -6,7 +6,7 @@ import androidx.camera.core.CameraSelector
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class CameraVM: ViewModel() {
+class CameraVM : ViewModel() {
 
     val savedUri = MutableLiveData<Uri?>(null)
 

@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dropDownBackground">#E5F3FF</color>
+    <color name="textFieldBackground">#F6F6F7</color>
+    <color name="black80">#66000000</color>
+    <color name="red">#EB4141</color>
 </resources>

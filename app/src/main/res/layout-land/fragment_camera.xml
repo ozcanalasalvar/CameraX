@@ -33,14 +33,14 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_width="130dp"
+                android:layout_height="0dp"
                 android:layout_gravity="bottom"
                 android:animateLayoutChanges="true"
                 android:background="@color/black80"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintTop_toTopOf="parent">
 
 
                 <LinearLayout
@@ -51,10 +51,10 @@
                     android:backgroundTint="@color/black80"
                     android:gravity="center"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="@+id/photoButton"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/photoButton"
-                    app:layout_constraintTop_toTopOf="@+id/photoButton">
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/photoButton">
 
                     <ImageView
                         android:id="@+id/ivFacing"
@@ -74,10 +74,10 @@
                     android:elevation="12dp"
                     android:visibility="gone"
                     app:cardCornerRadius="25dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/photoButton"
-                    app:layout_constraintEnd_toStartOf="@+id/photoButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/photoButton"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/photoButton"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:visibility="visible">
 
                     <ImageView
@@ -100,7 +100,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cameraOption">
+                    app:layout_constraintTop_toTopOf="parent">
 
 
                     <ProgressBar
@@ -119,57 +119,17 @@
                 </FrameLayout>
 
 
-                <LinearLayout
-                    android:id="@+id/cameraOption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/photo"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/swCameraOption"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-
-                        android:layout_marginEnd="10dp"
-                        android:checked="false"
-                        app:thumbTint="@color/white" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/video"
-                        android:textColor="@color/white"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_width="60dp"
+                android:layout_height="0dp"
                 android:background="@color/black80"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
 
 
                 <LinearLayout
@@ -180,9 +140,9 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/pnlRatio"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@+id/pnlRatio">
 
                     <ImageView
                         android:id="@+id/ivFlash"
@@ -201,9 +161,9 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/pnlFLash"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/pnlFLash"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
@@ -225,7 +185,7 @@
                     android:layout_gravity="center"
                     android:background="@color/black"
                     android:gravity="center"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -237,7 +197,7 @@
                         android:id="@+id/ivFlashOn"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="30dp"
                         android:background="@drawable/ic_circle"
                         android:backgroundTint="@color/black"
                         android:contentDescription="flashOn"
@@ -249,7 +209,7 @@
                         android:id="@+id/ivFlashOff"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="30dp"
                         android:background="@drawable/ic_circle"
                         android:backgroundTint="@color/black"
                         android:contentDescription="flashOff"
@@ -277,7 +237,7 @@
                     android:layout_gravity="center"
                     android:background="@color/black"
                     android:gravity="center"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -304,7 +264,7 @@
                         android:id="@+id/tvRatio_4_3"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="50dp"
                         android:background="@drawable/ic_circle"
                         android:backgroundTint="@color/black"
                         android:paddingTop="13dp"
@@ -321,14 +281,57 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+            <LinearLayout
+                android:id="@+id/cameraOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="30dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/photo"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/swCameraOption"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    app:thumbTint="@color/white"
+
+                    android:checked="false"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/video"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
             <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
                 android:id="@+id/zoomSeekWrapper"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
                 android:layout_gravity="left|bottom"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="300dp"
-                android:layout_marginBottom="200dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="100dp"
                 android:background="@drawable/curved_bg"
                 android:backgroundTint="@color/black80"
                 android:visibility="invisible"
@@ -351,6 +354,9 @@
             </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
     </FrameLayout>
 
 
