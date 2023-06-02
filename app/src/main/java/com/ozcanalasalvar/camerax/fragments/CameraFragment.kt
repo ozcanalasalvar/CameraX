@@ -1,12 +1,10 @@
 package com.ozcanalasalvar.camerax.fragments
 
 import android.annotation.SuppressLint
-import android.content.ContentValues
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -28,14 +26,12 @@ import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ozcanalasalvar.camerax.CameraVM
 import com.ozcanalasalvar.camerax.R
 import com.ozcanalasalvar.camerax.databinding.FragmentCameraBinding
-import com.ozcanalasalvar.camerax.utils.DateFormats
-import com.ozcanalasalvar.camerax.utils.DateFormatter
 import com.ozcanalasalvar.camerax.utils.MediaType
+import com.ozcanalasalvar.camerax.utils.OutputFileOptionsFactory
 import com.ozcanalasalvar.camerax.utils.getAspectRationString
 import com.ozcanalasalvar.camerax.utils.getDimensionRatioString
 import kotlinx.coroutines.delay
@@ -69,7 +65,7 @@ class CameraFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        binding.viewFinder.setOnTouchListener { view, motionEvent ->
+        binding.viewFinder.setOnTouchListener { _, motionEvent ->
             scaleGestureDetector.onTouchEvent(motionEvent)
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -133,24 +129,8 @@ class CameraFragment : Fragment() {
 
         val imageCapture = imageCapture ?: return
 
-
-        val contentValues = ContentValues().apply {
-            put(
-                MediaStore.MediaColumns.DISPLAY_NAME,
-                "CameraX-capture-" + DateFormatter.getCurrentDate(DateFormats.backend)
-            )
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            val appName = requireContext().resources.getString(R.string.app_name)
-            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/${appName}")
-
-        }
-        val outputOptions = ImageCapture.OutputFileOptions.Builder(
-            requireActivity().contentResolver,
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            contentValues
-        ).build()
-
-        imageCapture.takePicture(outputOptions,
+        imageCapture.takePicture(
+            OutputFileOptionsFactory().getPhotoOutputFileOption(requireActivity()),
             ContextCompat.getMainExecutor(requireContext()),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exc: ImageCaptureException) {
@@ -389,6 +369,6 @@ class CameraFragment : Fragment() {
 
 
     companion object {
-        private const val TAG = "MRCCamera"
+        private const val TAG = "CameraX"
     }
 }

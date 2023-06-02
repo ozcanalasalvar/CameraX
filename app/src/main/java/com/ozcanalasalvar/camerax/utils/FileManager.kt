@@ -2,14 +2,11 @@ package com.ozcanalasalvar.camerax.utils
 
 import android.content.Context
 import android.database.Cursor
-import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
-import java.io.BufferedWriter
 import java.io.File
-import java.io.FileOutputStream
 
 object FileManager {
 
@@ -26,19 +23,6 @@ object FileManager {
         val file = File(path)
         file.deleteRecursively()
     }
-
-    /*fun writeBitmapToAppDirectory(bitmap: Bitmap, context: Context, fileName: String = DateFormatter.getCurrentDate(DateFormats.backend) + ".jpg"): String {
-        val file = File(context.getExternalFilesDir(null), fileName).write(bitmap)
-        return file.absolutePath
-    }*/
-
-    /*fun writePDFToAppDirectory(context: Context, content: String, child: String): File {
-        val file = File(context.getExternalFilesDir(null), child)
-        val fileWriter = BufferedWriter(FileOutputStream(file).bufferedWriter())
-        fileWriter.write(content)
-        fileWriter.close()
-        return file
-    }*/
 
 
     fun getAbsolutePathFromUri(context: Context, contentUri: Uri): String? {

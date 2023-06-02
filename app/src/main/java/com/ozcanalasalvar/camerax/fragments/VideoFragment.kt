@@ -1,7 +1,6 @@
 package com.ozcanalasalvar.camerax.fragments
 
 import android.annotation.SuppressLint
-import android.content.ContentValues
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.media.ThumbnailUtils
@@ -27,7 +26,6 @@ import androidx.camera.core.FocusMeteringAction
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.video.FallbackStrategy
-import androidx.camera.video.MediaStoreOutputOptions
 import androidx.camera.video.Quality
 import androidx.camera.video.QualitySelector
 import androidx.camera.video.Recorder
@@ -46,10 +44,9 @@ import com.ozcanalasalvar.camerax.CameraVM
 import com.ozcanalasalvar.camerax.R
 import com.ozcanalasalvar.camerax.databinding.FragmentVideoBinding
 import com.ozcanalasalvar.camerax.utils.CameraConstant
-import com.ozcanalasalvar.camerax.utils.DateFormats
-import com.ozcanalasalvar.camerax.utils.DateFormatter
 import com.ozcanalasalvar.camerax.utils.FileManager
 import com.ozcanalasalvar.camerax.utils.MediaType
+import com.ozcanalasalvar.camerax.utils.OutputFileOptionsFactory
 import com.ozcanalasalvar.camerax.utils.getDimensionRatioString
 import com.ozcanalasalvar.camerax.utils.getNameString
 import kotlinx.coroutines.launch
@@ -87,7 +84,7 @@ class VideoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        binding.viewFinder.setOnTouchListener { view, motionEvent ->
+        binding.viewFinder.setOnTouchListener { _, motionEvent ->
             scaleGestureDetector.onTouchEvent(motionEvent)
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -236,21 +233,11 @@ class VideoFragment : Fragment() {
     @SuppressLint("MissingPermission")
     private fun startRecording() {
 
-        val contentValues = ContentValues().apply {
-            put(
-                MediaStore.MediaColumns.DISPLAY_NAME,
-                "MRC-recording-" + DateFormatter.getCurrentDate(DateFormats.backend)
-            )
-            put(MediaStore.MediaColumns.MIME_TYPE, "video/mp4")
-            val appName = requireContext().resources.getString(R.string.app_name)
-            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/${appName}")
-        }
-        val mediaStoreOutput = MediaStoreOutputOptions.Builder(
-            requireActivity().contentResolver, MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-        ).setContentValues(contentValues).build()
 
-        currentRecording = videoCapture.output.prepareRecording(requireActivity(), mediaStoreOutput)
-            .apply { if (viewModel.audioEnabled.value!!) withAudioEnabled() }
+        currentRecording = videoCapture.output.prepareRecording(
+            requireActivity(),
+            OutputFileOptionsFactory().getVideoOutputFileOption(requireActivity())
+        ).apply { if (viewModel.audioEnabled.value!!) withAudioEnabled() }
             .start(mainThreadExecutor, captureListener)
 
         Log.i(TAG, "Recording started")
@@ -269,6 +256,7 @@ class VideoFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun updateUI(event: VideoRecordEvent) {
         val state = if (event is VideoRecordEvent.Status) recordingState.getNameString()
         else event.getNameString()
@@ -433,7 +421,7 @@ class VideoFragment : Fragment() {
             )
         }
 
-        binding.previewImage.setImageBitmap(bitmapThumbnail);
+        binding.previewImage.setImageBitmap(bitmapThumbnail)
 
 
         binding.pnlPreview.setOnClickListener {
@@ -471,7 +459,6 @@ class VideoFragment : Fragment() {
 
     companion object {
         val TAG: String = VideoFragment::class.java.simpleName
-        const val DURATION = 120000L
     }
 
 }
