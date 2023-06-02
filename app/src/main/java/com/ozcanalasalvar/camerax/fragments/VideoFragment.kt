@@ -332,7 +332,7 @@ class VideoFragment : Fragment() {
 
         if (event is VideoRecordEvent.Finalize) {
             lifecycleScope.launch {
-                showPreview(event.outputResults.outputUri)
+                setPreview(event.outputResults.outputUri)
                 viewModel.savedUri.value = event.outputResults.outputUri
             }
         }
@@ -396,7 +396,7 @@ class VideoFragment : Fragment() {
     }
 
 
-    private fun showPreview(uri: Uri) {
+    private fun setPreview(uri: Uri) {
         binding.pnlPreview.visibility = View.VISIBLE
 
 

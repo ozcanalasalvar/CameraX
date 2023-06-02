@@ -139,7 +139,7 @@ class CameraFragment : Fragment() {
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    output.savedUri?.let { showPreview(it) }
+                    output.savedUri?.let { setPreview(it) }
                     viewModel.savedUri.value = output.savedUri
                     binding.captureProgress.visibility = View.GONE
                 }
@@ -340,7 +340,7 @@ class CameraFragment : Fragment() {
     }
 
 
-    private fun showPreview(uri: Uri) {
+    private fun setPreview(uri: Uri) {
         binding.previewImage.setImageURI(uri)
         binding.pnlPreview.visibility = View.VISIBLE
 
