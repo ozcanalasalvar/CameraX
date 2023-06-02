@@ -28,4 +28,11 @@
             app:popUpTo="@+id/nav_camera"
             app:popUpToInclusive="true" />
     </fragment>
+
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="com.ozcanalasalvar.camerax.fragments.PreviewFragment"
+        android:label="fragment_preview"
+        tools:layout="@layout/fragment_preview" />
+
 </navigation>

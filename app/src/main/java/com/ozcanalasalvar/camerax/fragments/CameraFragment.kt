@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
@@ -26,14 +25,17 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ozcanalasalvar.camerax.CameraVM
 import com.ozcanalasalvar.camerax.R
 import com.ozcanalasalvar.camerax.databinding.FragmentCameraBinding
 import com.ozcanalasalvar.camerax.utils.DateFormats
 import com.ozcanalasalvar.camerax.utils.DateFormatter
+import com.ozcanalasalvar.camerax.utils.MediaType
 import com.ozcanalasalvar.camerax.utils.getAspectRationString
 import com.ozcanalasalvar.camerax.utils.getDimensionRatioString
 import kotlinx.coroutines.delay
@@ -370,6 +372,14 @@ class CameraFragment : Fragment() {
     private fun showPreview(uri: Uri) {
         binding.previewImage.setImageURI(uri)
         binding.pnlPreview.visibility = View.VISIBLE
+
+
+        binding.pnlPreview.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString(ARG_PREVIEW_TYPE, MediaType.IMAGE)
+            bundle.putString(ARG_MEDIA_PATH, uri.toString())
+            findNavController().navigate(R.id.previewFragment, bundle)
+        }
     }
 
 

@@ -49,6 +49,7 @@ import com.ozcanalasalvar.camerax.utils.CameraConstant
 import com.ozcanalasalvar.camerax.utils.DateFormats
 import com.ozcanalasalvar.camerax.utils.DateFormatter
 import com.ozcanalasalvar.camerax.utils.FileManager
+import com.ozcanalasalvar.camerax.utils.MediaType
 import com.ozcanalasalvar.camerax.utils.getDimensionRatioString
 import com.ozcanalasalvar.camerax.utils.getNameString
 import kotlinx.coroutines.launch
@@ -436,10 +437,17 @@ class VideoFragment : Fragment() {
 
         binding.previewImage.setImageBitmap(bitmapThumbnail);
 
+
+        binding.pnlPreview.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString(ARG_PREVIEW_TYPE, MediaType.VIDEO)
+            bundle.putString(ARG_MEDIA_PATH, uri.toString())
+            findNavController().navigate(R.id.previewFragment, bundle)
+        }
+
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
 
     }
-
 
     private fun aspectRatio(width: Int, height: Int): Int {
         val previewRatio = max(width, height).toDouble() / min(width, height)
