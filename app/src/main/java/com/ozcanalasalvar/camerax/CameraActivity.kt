@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.activity.result.contract.ActivityResultContracts
@@ -33,6 +34,8 @@ class CameraActivity : AppCompatActivity() {
 
         initNavController()
 
+        binding.btnRequestPermission.setOnClickListener { requestPermissions() }
+
         if (!Permissions.isPermissionTaken(this)) {
             requestPermissions()
         }
@@ -51,7 +54,9 @@ class CameraActivity : AppCompatActivity() {
 
     private val permissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            permissions.entries.all { it.value }
+            val hasPermission = permissions.entries.all { it.value }
+            binding.pnlPermission.visibility =
+                if (!hasPermission) View.VISIBLE else View.GONE
         }
 
 }

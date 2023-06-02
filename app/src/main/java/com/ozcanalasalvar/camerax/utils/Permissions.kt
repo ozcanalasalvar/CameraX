@@ -8,11 +8,10 @@ import androidx.core.content.ContextCompat
 
 
 object Permissions {
-    var requestList = arrayOf(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_NETWORK_STATE)
+    var requestList = arrayOf(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO)
 
 
     public fun isPermissionTaken(activity: Activity): Boolean {
-
         return requestList.all {
                 isPermissionGranted(activity, it)
         }
