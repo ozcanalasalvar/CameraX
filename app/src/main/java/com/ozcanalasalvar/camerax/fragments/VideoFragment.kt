@@ -173,11 +173,6 @@ class VideoFragment : Fragment() {
 
 
     private fun observeUriState() {
-        viewModel.savedUri.observe(requireActivity()) { uri ->
-            uri?.let { showPreview(uri) }
-            Log.w("savedUri", uri.toString())
-        }
-
         viewModel.audioEnabled.observe(requireActivity()) { state ->
             binding.ivVolume.setImageResource(if (state == true) R.drawable.ic_volume_on else R.drawable.ic_volume_off)
         }
@@ -281,10 +276,13 @@ class VideoFragment : Fragment() {
             is VideoRecordEvent.Status -> {}
             is VideoRecordEvent.Start -> {
                 binding.pnlTimer.visibility = View.VISIBLE
+                binding.pnlPreview.visibility = View.GONE
+                binding.pnlSound.visibility = View.GONE
             }
 
             is VideoRecordEvent.Finalize -> {
                 binding.pnlTimer.visibility = View.GONE
+                binding.pnlSound.visibility = View.VISIBLE
                 enabledRecording(false)
             }
 

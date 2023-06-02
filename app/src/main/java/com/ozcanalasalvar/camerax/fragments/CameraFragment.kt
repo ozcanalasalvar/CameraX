@@ -120,20 +120,11 @@ class CameraFragment : Fragment() {
         cameraExecutor = Executors.newSingleThreadExecutor()
 
         bindCameraUseCases()
-
-        observeUriState()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         updateRatioView()
-    }
-
-    private fun observeUriState() {
-        viewModel.savedUri.observe(requireActivity()) { uri ->
-            uri?.let { showPreview(uri) }
-            Log.w("savedUri", uri.toString())
-        }
     }
 
     private fun takePhoto() {
