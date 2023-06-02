@@ -2,26 +2,24 @@ package com.ozcanalasalvar.camerax.fragments
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.media.ThumbnailUtils
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.CancellationSignal
 import android.os.CountDownTimer
 import android.provider.MediaStore
 import android.util.DisplayMetrics
 import android.util.Log
-import androidx.fragment.app.Fragment
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.MediaController
 import android.widget.SeekBar
-import androidx.activity.addCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
@@ -40,6 +38,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.util.Consumer
 import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -62,7 +61,6 @@ class VideoFragment : Fragment() {
 
     private val viewModel: CameraVM by viewModels()
     private lateinit var binding: FragmentVideoBinding
-
 
     private lateinit var videoCapture: VideoCapture<Recorder>
     private var currentRecording: Recording? = null
@@ -201,11 +199,6 @@ class VideoFragment : Fragment() {
                 dimensionRatio =
                     aspectRatio.getDimensionRatioString((orientation == Configuration.ORIENTATION_PORTRAIT))
             }
-
-            /* binding.videoViewer.updateLayoutParams<ConstraintLayout.LayoutParams> {
-                 val orientation = resources.configuration.orientation
-                 dimensionRatio = aspectRatio.getAspectRationString((orientation == Configuration.ORIENTATION_PORTRAIT))
-             }*/
 
             val localCameraProvider =
                 cameraProvider ?: throw IllegalStateException("Camera initialization failed.")
@@ -416,7 +409,7 @@ class VideoFragment : Fragment() {
 
 
     private fun showPreview(uri: Uri) {
-        // binding.previewWindow.visibility = View.VISIBLE
+        binding.pnlPreview.visibility = View.VISIBLE
 
 
         val fileSize = FileManager.getFileSizeFromUri(requireContext(), uri)
@@ -430,49 +423,22 @@ class VideoFragment : Fragment() {
         Log.i("VideoViewerFragment", fileInfo)
 
 
-        val mc = MediaController(requireContext())
-        val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT
-        )
-        params.bottomMargin = 200
-        mc.layoutParams = params
+        val mSize = Size(96, 96)
+        val ca = CancellationSignal()
+        val bitmapThumbnail = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            requireActivity().contentResolver.loadThumbnail(uri, mSize, ca)
+        } else {
+            ThumbnailUtils.createVideoThumbnail(
+                filePath, MediaStore.Video.Thumbnails.MICRO_KIND
+            )
+        }
 
-
+        binding.previewImage.setImageBitmap(bitmapThumbnail);
 
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
-        // mc.setAnchorView(binding.controllerView)
 
-
-        /* binding.videoViewer.apply {
-             setVideoURI(uri)
-             setMediaController(mc)
-             requestFocus()
-         }
-             .start()*/
-
-
-        /* binding.tvApprove.setOnClickListener {
-             val returnIntent = Intent()
-             returnIntent.putExtra("result", uri.toString())
-             requireActivity().setResult(AppCompatActivity.RESULT_OK, returnIntent)
-             requireActivity().finish()
-             clearPreview()
-         }
-
-         binding.tvTryAgain.setOnClickListener {
-             binding.previewWindow.visibility = View.GONE
-             viewModel.savedUri.value = null
-             clearPreview()
-             requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
-             FileManager.deleteFile(requireContext(), uri)
-         }*/
     }
 
-    private fun clearPreview() {/* binding.previewWindow.visibility = View.GONE
-         binding.videoViewer.visibility = View.GONE
-         binding.videoViewer.visibility = View.VISIBLE
-         binding.controllerView.removeAllViews()*/
-    }
 
     private fun aspectRatio(width: Int, height: Int): Int {
         val previewRatio = max(width, height).toDouble() / min(width, height)

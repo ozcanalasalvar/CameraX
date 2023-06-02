@@ -73,7 +73,7 @@ class CameraFragment : Fragment() {
                 MotionEvent.ACTION_DOWN -> {
                     binding.pnlFlashOptions.visibility = View.GONE
                     binding.pnlRatioOptions.visibility = View.GONE
-                     binding.zoomSeekWrapper.visibility = View.VISIBLE
+                    binding.zoomSeekWrapper.visibility = View.VISIBLE
                     startTouchTimer()
                     return@setOnTouchListener true
                 }
@@ -105,9 +105,8 @@ class CameraFragment : Fragment() {
         binding.tvRatio169.setOnClickListener(ratioChangeListener)
         binding.tvRatio43.setOnClickListener(ratioChangeListener)
 
-         binding.zoomSeekBar.setOnSeekBarChangeListener(zoomSeekListener)
+        binding.zoomSeekBar.setOnSeekBarChangeListener(zoomSeekListener)
         scaleGestureDetector = ScaleGestureDetector(requireContext(), zoomListener)
-
 
 
         binding.swCameraOption.setOnCheckedChangeListener { _, isChecked ->
@@ -188,8 +187,8 @@ class CameraFragment : Fragment() {
 
             val preview =
                 Preview.Builder().setTargetAspectRatio(viewModel.screenAspectRatio).build().also {
-                        it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
-                    }
+                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+                }
 
             imageCapture = ImageCapture.Builder()
                 .setFlashMode(imageCapture?.flashMode ?: ImageCapture.FLASH_MODE_AUTO)
@@ -307,7 +306,7 @@ class CameraFragment : Fragment() {
                 binding.zoomSeekBar.setOnSeekBarChangeListener(zoomSeekListener)
             }
 
-             binding.zoomSeekWrapper.visibility = View.VISIBLE
+            binding.zoomSeekWrapper.visibility = View.VISIBLE
             startTouchTimer()
 
             return true
@@ -368,21 +367,9 @@ class CameraFragment : Fragment() {
     }
 
 
-    private fun showPreview(uri: Uri) {/* binding.imageView.setImageURI(uri)
-         binding.previewWindow.visibility = View.VISIBLE
-
-         binding.tvApprove.setOnClickListener {
-             val returnIntent = Intent()
-             returnIntent.putExtra("result", uri.toString())
-             requireActivity().setResult(AppCompatActivity.RESULT_OK, returnIntent)
-             requireActivity().finish()
-         }
-
-         binding.tvTryAgain.setOnClickListener {
-             binding.previewWindow.visibility = View.GONE
-             viewModel.savedUri.value = null
-             FileManager.deleteFile(requireContext(), uri)
-         }*/
+    private fun showPreview(uri: Uri) {
+        binding.previewImage.setImageURI(uri)
+        binding.pnlPreview.visibility = View.VISIBLE
     }
 
 
@@ -394,7 +381,7 @@ class CameraFragment : Fragment() {
             override fun onTick(millisUntilFinished: Long) {}
 
             override fun onFinish() {
-                 binding.zoomSeekWrapper.visibility = View.INVISIBLE
+                binding.zoomSeekWrapper.visibility = View.INVISIBLE
             }
         }.start()
     }

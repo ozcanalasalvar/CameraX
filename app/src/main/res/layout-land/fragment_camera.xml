@@ -66,6 +66,30 @@
                 </LinearLayout>
 
 
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/pnlPreview"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:elevation="12dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/photoButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/previewImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:contentDescription="preview"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_launcher" />
+                </androidx.cardview.widget.CardView>
+
+
                 <FrameLayout
                     android:id="@+id/photoButton"
                     android:layout_width="90dp"

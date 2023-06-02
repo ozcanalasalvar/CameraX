@@ -213,6 +213,29 @@
             </LinearLayout>
 
 
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pnlPreview"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="200dp"
+                android:elevation="12dp"
+                android:gravity="center"
+                android:visibility="gone"
+                app:cardCornerRadius="45dp"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/previewImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:contentDescription="preview"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher" />
+            </androidx.cardview.widget.CardView>
+
             <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
                 android:id="@+id/zoomSeekWrapper"
                 android:layout_width="50dp"
@@ -239,92 +262,6 @@
             </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
 
         </FrameLayout>
-
-
-      <!--  <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/previewWindow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/black"
-            android:clickable="true"
-            android:focusable="true"
-            android:visibility="gone"
-            tools:visibility="gone">
-
-
-            <VideoView
-                android:id="@+id/video_viewer"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center|center"
-                android:layout_margin="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/pnlConfirm"
-                app:layout_constraintDimensionRatio="V,9:16"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <FrameLayout
-                android:id="@+id/controllerView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/video_viewer"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-
-            <LinearLayout
-                android:id="@+id/pnlConfirm"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-
-                    <TextView
-                        android:id="@+id/tvTryAgain"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/retry"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/tvApprove"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/save"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                </FrameLayout>
-
-            </LinearLayout>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     </FrameLayout>
 
